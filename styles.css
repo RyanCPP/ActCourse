@@ -1,0 +1,20 @@
+.dark {
+	background: #999;
+}
+
+.darker {
+	background: #666;
+}
+
+.darkest {
+	background: #333;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  opacity: 1;
+  z-index: 1;
+}
