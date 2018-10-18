@@ -54,8 +54,8 @@
 							  <th scope="col">Option</th>
 							</tr>
 						  </thead>
-						  <tbody>
-							<tr>
+						  <tbody id="tableBody">
+							<!--<tr>
 							  <td>CT1</td>
 							  <td>description variable passed from php</td>
 							  <td>Purchase</td>
@@ -119,7 +119,7 @@
 							  <td>SQL</td>
 							  <td>description variable passed from php</td>
 							  <td>Purchase</td>
-							</tr>
+							</tr>-->
 						  </tbody>
 						</table>
 					</div>
@@ -131,7 +131,7 @@
 		<!-- once user selects an exam then the below should be populated with an appropriate price and the "add to cart" buttons should be clickable -->
 		<div class="container" style="background-color: white; height:700px">
 			<div class="container" style="background-color: white; height: 100px;"></div>
-			<div class="container" style="background-color: white; height: 100px; text-align: center"><h4>Our Packages</h4></div> <!-- this heading should be dynamic, ie if user selects CT5 then it should say "Our CT5 Packages" -->
+			<div class="container" style="background-color: white; height: 100px; text-align: center"><h4 id="courseName">Select a Package</h4></div> <!-- this heading should be dynamic, ie if user selects CT5 then it should say "Our CT5 Packages" -->
 			<div class="container" style="background-color: white; height: 50px;"></div>
 			<div class="container">
 			  <div class="card-deck mb-3 text-center">
@@ -140,7 +140,7 @@
 					<h4 class="my-0 font-weight-normal">Basic</h4>
 				  </div>
 				  <div class="card-body">
-					<h1 class="card-title pricing-card-title" style="color: gray"><em></em></h1>
+					<h1 class="card-title pricing-card-title" style="color: gray" id="basicTotal"><em></em></h1>
 					<ul class="list-unstyled mt-3 mb-4">
 					  <li>6 Months Full Access</li>
 					  <li>Discussion Forum</li>
@@ -149,7 +149,7 @@
 					  <li>Study Notes</li>
 					</ul>
 					<div class="row" style="height: 75px"></div>
-					<button type="button" class="btn btn-lg btn-block btn-outline-success">Add to Cart</button>
+					<button type="button" class="btn btn-lg btn-block btn-outline-success" onclick="addToCart('Basic')">Add to Cart</button>
 				  </div>
 				</div>
 				<div class="card mb-4 shadow-sm">
@@ -157,7 +157,7 @@
 					<h4 class="my-0 font-weight-normal">Intermediate</h4>
 				  </div>
 				  <div class="card-body">
-					<h1 class="card-title pricing-card-title" style="color: gray"><em></em></h1>
+					<h1 class="card-title pricing-card-title" style="color: gray" id="intermediateTotal"><em></em></h1>
 					<ul class="list-unstyled mt-3 mb-4">
 					  <li>6 Months Full Access</li>
 					  <li>Discussion Forum</li>
@@ -168,7 +168,7 @@
 					  <li>Video Lectures</li>
 					</ul>
 					<div class="row" style="height: 25px"></div>
-					<button type="button" class="btn btn-lg btn-block btn-success">Add to Cart</button>
+					<button type="button" class="btn btn-lg btn-block btn-success" onclick="addToCart('Intermediate')">Add to Cart</button>
 				  </div>
 				</div>
 				<div class="card mb-4 shadow-sm">
@@ -176,7 +176,7 @@
 					<h4 class="my-0 font-weight-normal">Professional</h4>
 				  </div>
 				  <div class="card-body">
-					<h1 class="card-title pricing-card-title" style="color: gray"><em></em></h1>
+					<h1 class="card-title pricing-card-title" style="color: gray" id="proTotal"><em></em></h1>
 					<ul class="list-unstyled mt-3 mb-4">
 					  <li>6 Months Full Access</li>
 					  <li>Discussion Forum</li>
@@ -187,11 +187,54 @@
 					  <li>Video Lectures</li>
 					  <li>Past Exam Review</li>
 					</ul>
-					<button type="button" class="btn btn-lg btn-block btn-success">Add to Cart</button>
+					<button type="button" class="btn btn-lg btn-block btn-success" onclick="addToCart('Pro')">Add to Cart</button>
 				  </div>
 				</div>
 			  </div>
-
+			
+			<div class="row" style="height: 50px;"></div>
+			<div class="row" style="height: 50px; text-align: center">
+				<div class="col-md-5"></div>
+				<div class="col-md-2"><h4>My Cart</h4></div>
+				<div class="col-md-5"></div>
+			</div>			
+			<div class="row" style="height:250px" id="spaceHeight">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3"></div>
+						<div class="col-md-6">
+							<table class="table table-hover" style="text-align:center"> <!-- table-dark -->
+							  <thead>
+								<tr>
+								  <th scope="col">Course</th>
+								  <th scope="col">Package</th>
+								  <th scope="col">Price</th>
+								  <th scope="col">Option</th>
+								</tr>
+							  </thead>
+							  <tbody id="cartTableBody">
+							  </tbody>
+							  <tfoot>
+								<tr>
+									<td colspan="2"></td>
+									<td style="text-align:center"><b>Total</b></td>
+									<td id="cartTotal"><b></b></td>
+								</tr>
+							  </tfoot>
+							</table>
+						</div>
+						<div class="col-md-3"></div>
+					</div>
+					<div class="row">
+					<div class="col-md-5"></div>
+					<div class="col-md-2">
+						<button type="button" class="btn btn-block btn-info">Checkout</button> <!-- success is green, primary is blue, secondary is grey, info is light blue, light is light grey -->
+					</div>
+					<div class="col-md-5"></div>
+					</div>
+				</div>
+			</div>
+				
 			  <footer class="pt-4 my-md-5 pt-md-5 border-top">
 				<div class="row">
 				  <div class="col-12 col-md">
@@ -241,6 +284,89 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script>
+			var allCourses = ["CS1","CS2","CM1","CM2","CB1","CB2","CB3","CP1","CP2","CP3","Excel","SQL"];
+			var coursePrices = [100,110,120,130,140,150,160,170,180,190,200,210];
+			var numAllCourses = allCourses.length;
+			var userExams = ["CM2","CB2","CP2","CS1"];
+			var numUserExams = userExams.length;
+			var text = "";
+			var textNotRegis = "Purchase";
+			var textRegis = "<i><b>Upgrade</b></i>";
+			var totalCost = 0;
+			var priceText = "";
+			var selectedExams = [];
+			var selectedExam;
+			var selectedExamPrice;
+			var cartSum;
+			var previousRow;
+			
+			
+			for (i = 0; i < numAllCourses; i++){
+				
+				var text2;
+				
+				for (j = 0; j < numUserExams; j++){
+					if(allCourses[i] == userExams[j]){
+						text2 = textRegis;
+						break;
+					}
+					else
+						text2 = textNotRegis;
+				}
+				
+				text += "<tr id=\"course" + i + "\" onclick=\"showCost('" + allCourses[i] + "', coursePrices, allCourses, " + i + ")\"><td>" + allCourses[i] + "</td><td>description variable passed from php</td><td>" + text2 + "</td></tr>";
+			}
+			
+			document.getElementById("tableBody").innerHTML = text;
+			
+			
+			function showCost(course, prices, courses, rowNumber){
+				document.getElementById("basicTotal").innerHTML = "<em>$" + prices[courses.indexOf(course)] + "</em>";
+				document.getElementById("intermediateTotal").innerHTML = "<em>$" + prices[courses.indexOf(course)]*1.25 + "</em>";
+				document.getElementById("proTotal").innerHTML = "<em>$" + prices[courses.indexOf(course)]*1.5 + "</em>";
+				selectedExam = course;
+				selectedExamPrice = prices[courses.indexOf(course)];
+				document.getElementById("course" + rowNumber).style.backgroundColor = "grey";
+				document.getElementById("courseName").innerHTML = "Our " + selectedExam + " Packages";
+				if(previousRow == null){
+					previousRow = rowNumber;
+				}
+				else{
+					document.getElementById("course" + previousRow).style.backgroundColor = "white";
+					previousRow = rowNumber;
+					}
+			}
+						
+			function addToCart(packageChosen){
+				if(selectedExam == null){
+					alert("Please select an exam.");
+				}
+				else{
+					selectedExams.push(selectedExam, packageChosen, selectedExamPrice);
+					amendCart(selectedExams);
+				}
+					
+			}
+			
+			function amendCart(chosenExamsArray){
+				cartSum = 0;
+				text = "";
+				for (i = 0; i < chosenExamsArray.length / 3; i++){
+					text += "<tr><td>" + chosenExamsArray[3 * i] + "</td><td>" + chosenExamsArray[3 * i + 1] + "</td><td>$ " + chosenExamsArray[3 * i + 2] + "</td><td><img src=\"delete.png\" alt=\"Delete\" style=\"height:20px; width:20px\" onclick=\"deleteItem(" + i * 3 + ")\"></td></tr>";
+					cartSum += chosenExamsArray[3 * i + 2];
+				}
+				document.getElementById("cartTableBody").innerHTML = text;
+				document.getElementById("spaceHeight").style.height = (chosenExamsArray.length / 3)*50 + 250 + "px";
+				document.getElementById("cartTotal").innerHTML = "$ " + cartSum;
+			}
+			
+			function deleteItem(start){
+				selectedExams.splice(start,3);
+				amendCart(selectedExams);
+			}
+			
+		</script>
 	</body>
 
 
