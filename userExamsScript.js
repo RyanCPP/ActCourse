@@ -35,7 +35,11 @@ if(selectionFromDash != null){
 */
 
 function populateContent(course, idUsed){
-	document.getElementById("collapseOne").innerHTML = "this is " + course;
+	if(course == "CM1"){
+		document.getElementById("collapseOne").innerHTML = "<a href=\"CalcIII_Complete.pdf\" target=\"_blank\">CM1 Notes</a>";
+	}
+	else
+		document.getElementById("collapseOne").innerHTML = "this is " + course;
 	document.getElementById("collapseTwo").innerHTML = "this is " + course;
 	document.getElementById("collapseThree").innerHTML = "this is " + course;
 	document.getElementById("collapseFour").innerHTML = "this is " + course;
