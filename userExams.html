@@ -209,20 +209,9 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-		<script>
-			function populateContent(course){
-				//if(course=="CT2"){
-					document.getElementById("collapseOne").innerHTML = "this is " + course;
-					document.getElementById("collapseTwo").innerHTML = "this is " + course;
-					document.getElementById("collapseThree").innerHTML = "this is " + course;
-					document.getElementById("collapseFour").innerHTML = "this is " + course;
-					document.getElementById("collapseFive").innerHTML = "this is " + course;
-				//}
-				//else 
-				//	document.getElementById("collapseOne").innerHTML = "this is nonsense";
-			}
-		</script>
-		<script>
+		<!--<script src="userPageScript.js"></script>-->
+		<script src="userExamsScript.js"></script>
+		<!-- <script>
 			var courses = ["CT2","CT6","CA2"];//,"CT5","CA1"];
 			var products = ["Course Notes","Course Videos","Past Exam Review","Study Planner","Chat Forum"];
 			var productStyle = ["One","Two","Three","Four","Five"];
@@ -230,9 +219,26 @@
 			var numProducts = products.length;
 			var courseText = "";
 			var productText = "";
+			var lastIdUsed;
+			
+			function populateContent(course, idUsed){
+				document.getElementById("collapseOne").innerHTML = "this is " + course;
+				document.getElementById("collapseTwo").innerHTML = "this is " + course;
+				document.getElementById("collapseThree").innerHTML = "this is " + course;
+				document.getElementById("collapseFour").innerHTML = "this is " + course;
+				document.getElementById("collapseFive").innerHTML = "this is " + course;
+				document.getElementById(idUsed).className = "btn btn-info";
+				if (lastIdUsed == null){
+					lastIdUsed = idUsed;
+				}
+				else{
+					document.getElementById(lastIdUsed).className = "btn btn-outline-info";
+					lastIdUsed = idUsed;
+				}
+			}
 			
 			for (i = 0; i < numCourses; i++){
-				courseText += "<div class=\"row\"><div class=\"col-md-4\"></div><div class=\"col-md-4\"><button type=\"button\" class=\"btn btn-outline-info\" style=\"width: 100%\" onclick=\"populateContent('" + courses[i] + "')\">" + courses[i] + "</button></div><div class=\"col-md-4\"></div></div><div class=\"row\" style=\"height:10px\"></div>";
+				courseText += "<div class=\"row\"><div class=\"col-md-4\"></div><div class=\"col-md-4\"><button type=\"button\" class=\"btn btn-outline-info\" style=\"width: 100%\" id=\"courseButton" + i + "\" onclick=\"populateContent('" + courses[i] + "', 'courseButton" + i + "')\">" + courses[i] + "</button></div><div class=\"col-md-4\"></div></div><div class=\"row\" style=\"height:10px\"></div>";
 			}
 			courseText += "<div class=\"row\" style=\"height: 50px\"></div>";
 			document.getElementById("courseNames").innerHTML = courseText;
@@ -244,7 +250,7 @@
 			document.getElementById("accordionExample").innerHTML = productText;
 			
 			
-		</script>
+		</script> -->
 	
 	</body>
 
