@@ -1,0 +1,1 @@
+create table registeredExams (id int not null primary key, code varchar(5));

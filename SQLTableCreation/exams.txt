@@ -1,0 +1,1 @@
+create table exams (code varchar(5) not null, description varchar(30) not null, nextExamDate datetime);

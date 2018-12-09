@@ -1,0 +1,1 @@
+create table coursesPurchased (id int not null primary key, code varchar(5), purchaseDate datetime, expiryDate datetime);
