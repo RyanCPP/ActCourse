@@ -1,0 +1,22 @@
+Install git:
+    Linux: sudo apt-get install git
+
+Install MySQL:
+    Linux: sudo apt-get install mysql-server
+
+Install PHP:
+    Linux: sudo apt-get install php
+
+Get PHP/MySQL config files:
+    Linux: sudo apt-get install php-mysql
+
+To Test:
+    Linux: go into the folder where your PHP file is in
+            open a terminal in that folder
+            run php -S localhost:8000
+            go to following address in web browser  http://localhost:8000
+            there must be a file called index.php or index.html in the location that the web server has started
+
+MySQL/PHP Code:
+    code found @ https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php
+    this site has (most useful, simple and effective) code that can be used
