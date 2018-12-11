@@ -1,0 +1,1 @@
+create table chatForums (id int not null primary key, dateCreated datetime DEFAULT CURRENT_TIMESTAMP, code varchar(5), message varchar(1000));
