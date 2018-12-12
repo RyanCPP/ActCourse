@@ -14,7 +14,10 @@ require_once "config.php";
 // Define variables and initialize with empty values
 $firstName = $lastName = $country = $industry = $receiveEmails = $siteCharacter = $siteName = "";
 $firstName_err = $lastName_err = $country_err = $industry_err = $receiveEmails_err = $siteCharacter_err = $siteName_err = $exams_err = "";
- 
+//$exams needs to be set via an sql query so that if exams are updated this assignment is automatically updated
+$exams = array("CS1","CS2","CM1","CM2","CB1","CB2","CB3","CP1","CP2","CP3","ST0","ST1","ST2","ST4","ST5","ST6","ST7","ST8","ST9","SA0","SA1","SA2","SA3","SA4","SA5","SA6"); 
+$examsLength = count($exams);
+
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
@@ -94,7 +97,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $param_id = $_SESSION["id"];
                     mysqli_stmt_execute($stmt);
                     
-              
+                    for($i = 0; $i < $examsLength; $i++){
+                        $sql = "insert into userExams (id, code, passedIndicator) values (?, ?, ?)";
+                        $stmt = mysqli_prepare($link, $sql);
+                        mysqli_stmt_bind_param($stmt,"isi",$param_id,$param_code,$param_ind);
+
+                        $param_id = $_SESSION["id"];
+                        $param_code = $exams[$i];
+                        if(isset($_POST[$exams[$i]])){                    
+                            $param_ind = 1;}
+                        else {
+                            $param_ind = 0;}
+                        //$param_ind = $i;
+
+                        mysqli_stmt_execute($stmt);
+                        mysqli_stmt_reset($stmt);                        
+                    }
+                    
                 }
 
                 // Redirect user to welcome page
@@ -410,31 +429,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="form-group <?php echo (!empty($exam_err)) ? 'has-error' : ''; ?>">
                 <label>Exams Passed</label>
-                <input type="radio" name="CS1" value="true" class="form-control">CS1<br>
-                <input type="radio" name="CS2" value="true" class="form-control">CS2<br>
-                <input type="radio" name="CM1" value="true" class="form-control">CM1<br>
-                <input type="radio" name="CM2" value="true" class="form-control">CM2<br>
-                <input type="radio" name="CB1" value="true" class="form-control">CB1<br>
-                <input type="radio" name="CB2" value="true" class="form-control">CB2<br>
-                <input type="radio" name="CB3" value="true" class="form-control">CB3<br>
-                <input type="radio" name="CP1" value="true" class="form-control">CP1<br>
-                <input type="radio" name="CP2" value="true" class="form-control">CP2<br>
-                <input type="radio" name="CP3" value="true" class="form-control">CP3<br>
-                <input type="radio" name="ST0" value="true" class="form-control">ST0<br>
-                <input type="radio" name="ST1" value="true" class="form-control">ST1<br>
-                <input type="radio" name="ST2" value="true" class="form-control">ST2<br>
-                <input type="radio" name="ST4" value="true" class="form-control">ST4<br>
-                <input type="radio" name="ST5" value="true" class="form-control">ST5<br>
-                <input type="radio" name="ST6" value="true" class="form-control">ST6<br>
-                <input type="radio" name="ST8" value="true" class="form-control">ST8<br>
-                <input type="radio" name="ST9" value="true" class="form-control">ST9<br>
-                <input type="radio" name="SA0" value="true" class="form-control">SA0<br>
-                <input type="radio" name="SA1" value="true" class="form-control">SA1<br>
-                <input type="radio" name="SA2" value="true" class="form-control">SA2<br>
-                <input type="radio" name="SA3" value="true" class="form-control">SA3<br>
-                <input type="radio" name="SA4" value="true" class="form-control">SA4<br>
-                <input type="radio" name="SA5" value="true" class="form-control">SA5<br>
-                <input type="radio" name="SA6" value="true" class="form-control">SA6<br>
+                <input type="radio" name="CS1" class="form-control">CS1<br>
+                <input type="radio" name="CS2" class="form-control">CS2<br>
+                <input type="radio" name="CM1" class="form-control">CM1<br>
+                <input type="radio" name="CM2" class="form-control">CM2<br>
+                <input type="radio" name="CB1" class="form-control">CB1<br>
+                <input type="radio" name="CB2" class="form-control">CB2<br>
+                <input type="radio" name="CB3" class="form-control">CB3<br>
+                <input type="radio" name="CP1" class="form-control">CP1<br>
+                <input type="radio" name="CP2" class="form-control">CP2<br>
+                <input type="radio" name="CP3" class="form-control">CP3<br>
+                <input type="radio" name="ST0" class="form-control">ST0<br>
+                <input type="radio" name="ST1" class="form-control">ST1<br>
+                <input type="radio" name="ST2" class="form-control">ST2<br>
+                <input type="radio" name="ST4" class="form-control">ST4<br>
+                <input type="radio" name="ST5" class="form-control">ST5<br>
+                <input type="radio" name="ST6" class="form-control">ST6<br>
+                <input type="radio" name="ST7" class="form-control">ST7<br>
+                <input type="radio" name="ST8" class="form-control">ST8<br>
+                <input type="radio" name="ST9" class="form-control">ST9<br>
+                <input type="radio" name="SA0" class="form-control">SA0<br>
+                <input type="radio" name="SA1" class="form-control">SA1<br>
+                <input type="radio" name="SA2" class="form-control">SA2<br>
+                <input type="radio" name="SA3" class="form-control">SA3<br>
+                <input type="radio" name="SA4" class="form-control">SA4<br>
+                <input type="radio" name="SA5" class="form-control">SA5<br>
+                <input type="radio" name="SA6" class="form-control">SA6<br>
                 <span class="help-block"><?php echo $exams_err; ?></span>
             </div>
             <div class="form-group">

@@ -1,0 +1,1 @@
+create table userExams (id int not null, code varchar(5), passedIndicator smallint, registeredIndicator smallint);
