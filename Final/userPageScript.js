@@ -1,14 +1,17 @@
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------UserPage Script--------------------*/
 
-var userCourses = ["CM1","CM2","SQL"];//,"Excel"];
-var courseProgress = [48,52,13,55];
+//var userCourses = ["CM1","CM2","SQL"];//,"Excel"];
+//var courseProgress = [48,52,13,55];
+
+//var userCourses = <?php echo $userCourses1; ?>;
+//var userProgress = <?php echo ($userProgress); ?>;
 var text = "";
 //var selectionFromDash;
 //var selectionFromDashNum;
 
 for (i = 0; i < userCourses.length; i++){
-	text += "<tr style=\"text-align:center\"><td><a href=\"userExams.html\" onclick=\"setFirstSelection('" + userCourses[i] + "', 'courseButton" + i + "')\">" + userCourses[i] + "</a></td><td>" + courseProgress[i] + "%</td><td id=\"demo" + (i + 1) + "\"></td></tr>";
+	text += "<tr style=\"text-align:center\"><td><a href=\"userExams.html\" onclick=\"setFirstSelection('" + userCourses[i] + "', 'courseButton" + i + "')\">" + userCourses[i] + "</a></td><td>" + 10/*courseProgress[i]*/ + "%</td><td id=\"demo" + (i + 1) + "\"></td></tr>";
 }
 
 document.getElementById("tableBody").innerHTML = text;

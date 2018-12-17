@@ -4,7 +4,7 @@ session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION["firstLogin"] == 0){
-    header("location: welcome.php");
+    header("location: userPage.php");
     exit;
 }
  
@@ -117,7 +117,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 }
 
                 // Redirect user to welcome page
-                header("location: welcome.php");
+                header("location: userPage.php");
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -428,33 +428,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $country_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($exam_err)) ? 'has-error' : ''; ?>">
-                <label>Exams Passed</label>
-                <input type="radio" name="CS1" class="form-control">CS1<br>
-                <input type="radio" name="CS2" class="form-control">CS2<br>
-                <input type="radio" name="CM1" class="form-control">CM1<br>
-                <input type="radio" name="CM2" class="form-control">CM2<br>
-                <input type="radio" name="CB1" class="form-control">CB1<br>
-                <input type="radio" name="CB2" class="form-control">CB2<br>
-                <input type="radio" name="CB3" class="form-control">CB3<br>
-                <input type="radio" name="CP1" class="form-control">CP1<br>
-                <input type="radio" name="CP2" class="form-control">CP2<br>
-                <input type="radio" name="CP3" class="form-control">CP3<br>
-                <input type="radio" name="ST0" class="form-control">ST0<br>
-                <input type="radio" name="ST1" class="form-control">ST1<br>
-                <input type="radio" name="ST2" class="form-control">ST2<br>
-                <input type="radio" name="ST4" class="form-control">ST4<br>
-                <input type="radio" name="ST5" class="form-control">ST5<br>
-                <input type="radio" name="ST6" class="form-control">ST6<br>
-                <input type="radio" name="ST7" class="form-control">ST7<br>
-                <input type="radio" name="ST8" class="form-control">ST8<br>
-                <input type="radio" name="ST9" class="form-control">ST9<br>
-                <input type="radio" name="SA0" class="form-control">SA0<br>
-                <input type="radio" name="SA1" class="form-control">SA1<br>
-                <input type="radio" name="SA2" class="form-control">SA2<br>
-                <input type="radio" name="SA3" class="form-control">SA3<br>
-                <input type="radio" name="SA4" class="form-control">SA4<br>
-                <input type="radio" name="SA5" class="form-control">SA5<br>
-                <input type="radio" name="SA6" class="form-control">SA6<br>
+                <label>Exams Passed</label><br>
+                <input type="radio" name="CS1"> CS1<br>
+                <input type="radio" name="CS2"> CS2<br>
+                <input type="radio" name="CM1"> CM1<br>
+                <input type="radio" name="CM2"> CM2<br>
+                <input type="radio" name="CB1"> CB1<br>
+                <input type="radio" name="CB2"> CB2<br>
+                <input type="radio" name="CB3"> CB3<br>
+                <input type="radio" name="CP1"> CP1<br>
+                <input type="radio" name="CP2"> CP2<br>
+                <input type="radio" name="CP3"> CP3<br>
+                <input type="radio" name="ST0"> ST0<br>
+                <input type="radio" name="ST1"> ST1<br>
+                <input type="radio" name="ST2"> ST2<br>
+                <input type="radio" name="ST4"> ST4<br>
+                <input type="radio" name="ST5"> ST5<br>
+                <input type="radio" name="ST6"> ST6<br>
+                <input type="radio" name="ST7"> ST7<br>
+                <input type="radio" name="ST8"> ST8<br>
+                <input type="radio" name="ST9"> ST9<br>
+                <input type="radio" name="SA0"> SA0<br>
+                <input type="radio" name="SA1"> SA1<br>
+                <input type="radio" name="SA2"> SA2<br>
+                <input type="radio" name="SA3"> SA3<br>
+                <input type="radio" name="SA4"> SA4<br>
+                <input type="radio" name="SA5"> SA5<br>
+                <input type="radio" name="SA6"> SA6<br>
                 <span class="help-block"><?php echo $exams_err; ?></span>
             </div>
             <div class="form-group">
