@@ -98,9 +98,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     mysqli_stmt_execute($stmt);
                     
                     for($i = 0; $i < $examsLength; $i++){
-                        $sql = "insert into userExams (id, code, passedIndicator) values (?, ?, ?)";
+                        $sql = "insert into userExams (id, code, passedIndicator, registeredIndicator) values (?, ?, ?, ?)";
                         $stmt = mysqli_prepare($link, $sql);
-                        mysqli_stmt_bind_param($stmt,"isi",$param_id,$param_code,$param_ind);
+                        mysqli_stmt_bind_param($stmt,"isii",$param_id,$param_code,$param_ind, $param_regInd);
 
                         $param_id = $_SESSION["id"];
                         $param_code = $exams[$i];
@@ -109,6 +109,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         else {
                             $param_ind = 0;}
                         //$param_ind = $i;
+
+                        if(isset($_POST[$exams[$i]."reg"])){                    
+                            $param_regInd = 1;}
+                        else {
+                            $param_regInd = 0;}
 
                         mysqli_stmt_execute($stmt);
                         mysqli_stmt_reset($stmt);                        
@@ -427,7 +432,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </select>
                 <span class="help-block"><?php echo $country_err; ?></span>
             </div>
-            <div class="form-group <?php echo (!empty($exam_err)) ? 'has-error' : ''; ?>">
+            <div class="form-group <?php echo (!empty($exams_err)) ? 'has-error' : ''; ?>">
                 <label>Exams Passed</label><br>
                 <input type="radio" name="CS1"> CS1<br>
                 <input type="radio" name="CS2"> CS2<br>
@@ -456,6 +461,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="radio" name="SA5"> SA5<br>
                 <input type="radio" name="SA6"> SA6<br>
                 <span class="help-block"><?php echo $exams_err; ?></span>
+            </div>
+            <div class="form-group <?php echo (!empty($examReg_err)) ? 'has-error' : ''; ?>">
+                <label>Exams Registered For in the coming Session</label><br>
+                <input type="radio" name="CS1reg"> CS1<br>
+                <input type="radio" name="CS2reg"> CS2<br>
+                <input type="radio" name="CM1reg"> CM1<br>
+                <input type="radio" name="CM2reg"> CM2<br>
+                <input type="radio" name="CB1reg"> CB1<br>
+                <input type="radio" name="CB2reg"> CB2<br>
+                <input type="radio" name="CB3reg"> CB3<br>
+                <input type="radio" name="CP1reg"> CP1<br>
+                <input type="radio" name="CP2reg"> CP2<br>
+                <input type="radio" name="CP3reg"> CP3<br>
+                <input type="radio" name="ST0reg"> ST0<br>
+                <input type="radio" name="ST1reg"> ST1<br>
+                <input type="radio" name="ST2reg"> ST2<br>
+                <input type="radio" name="ST4reg"> ST4<br>
+                <input type="radio" name="ST5reg"> ST5<br>
+                <input type="radio" name="ST6reg"> ST6<br>
+                <input type="radio" name="ST7reg"> ST7<br>
+                <input type="radio" name="ST8reg"> ST8<br>
+                <input type="radio" name="ST9reg"> ST9<br>
+                <input type="radio" name="SA0reg"> SA0<br>
+                <input type="radio" name="SA1reg"> SA1<br>
+                <input type="radio" name="SA2reg"> SA2<br>
+                <input type="radio" name="SA3reg"> SA3<br>
+                <input type="radio" name="SA4reg"> SA4<br>
+                <input type="radio" name="SA5reg"> SA5<br>
+                <input type="radio" name="SA6reg"> SA6<br>
+                <span class="help-block"><?php echo $examReg_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">

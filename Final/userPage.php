@@ -126,6 +126,7 @@ mysqli_free_result($result);
 // Close statement
 mysqli_stmt_close($stmt);
 
+
 // Close connection
 mysqli_close($link);
 
@@ -174,10 +175,10 @@ mysqli_close($link);
 		</header>
 		
 		<div class="container-fluid" style="background-color: white; height: 500px;">
-			<div class="container" style="height: 150px"><h3 style="text-align:center; padding-top: 50px; padding-bottom: 10px">Welcome, <?php echo $_SESSION["name"] ?>!</h3></div> <!-- this name next to "welcome" must be dynamic -->
+			<div class="container" style="height: 150px"><h3 style="text-align:center; padding-top: 50px; padding-bottom: 10px">Welcome, <?php echo $_SESSION["name"] ?>!</h3></div>
 			<div class="container" style="height: 30px; text-align: center"><b>Associateship Progress: 50%</b></div>		<!-- the percentage stated here and below for fellowship progress must be dynamically assigned -->
 			<div class="container">
-				<div class="row" style="background-color: white; height:30px;">							<!-- the colours on these columns below must be dynamically assigned -->
+				<div class="row" style="background-color: white; height:30px;">
                     <div class="col-md-1"></div>
                     <div class="col-md-1" style="text-color: gray; text-align: center;" id="cs1Progress">CS1</div> <!-- outline: 1px solid; outline-color: gray" -->
 					<div class="col-md-1" style="text-color: gray; text-align: center;" id="cs2Progress">CS2</div>
@@ -223,21 +224,6 @@ mysqli_close($link);
 									</tr>
 								  </thead>
 								  <tbody id="tableBody">
-									<!-- <tr style="text-align:center">
-									  <td>CT2</td>
-									  <td>48%</td>
-									  <td id="demo1"></td>
-									</tr>
-									<tr style="text-align:center">
-									  <td>CT6</td>
-									  <td>81%</td>
-									  <td>you</td>
-									</tr>
-									<tr style="text-align:center">
-									  <td>CA2</td>
-									  <td>75%</td>
-									  <td>us</td>
-									</tr> -->
 								  </tbody>
 								</table>	
 							</div>
@@ -248,7 +234,7 @@ mysqli_close($link);
 		</div>	
 		
 		<!-- Account Settings -->
-		<div class="container-fluid" style="background-color: white; height: 600px" id="Settings">
+		<div class="container-fluid" style="background-color: white; height: 600px;" id="Settings">
 			
 			<!-- Modal -->
 			<div id="myModal" class="modal">
@@ -281,58 +267,60 @@ mysqli_close($link);
 					<div class="col-md-1"></div>
 					<div class="col-md-4">
 						<div class="row">	
-							<div class="col-md-8">
+							<div class="col-md-12">
 								<div class="row"><b><i>Username</i></b></div>
 								<div class="row"><?php echo $_SESSION["name"] ?></div>
 							</div>
-							<div class="col-md-4">
-								<button type="button" class="btn btn-secondary" id="editBtn">Edit</button>
-							</div>
+							<!--<div class="col-md-4">
+								<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">Edit</button>
+							</div>-->
 						</div>
 						<div class="row" style="height:20px"></div>
 						<div class="row">	
-							<div class="col-md-8">
+							<div class="col-md-12">
 								<div class="row"><b><i>Email Address</i></b></div>
 								<div class="row"><?php echo $_SESSION["email"] ?></div>
 							</div>
-							<div class="col-md-4">
+							<!--<div class="col-md-4">
 								<button type="button" class="btn btn-secondary">Edit</button>
-							</div>
+							</div>-->
 						</div>
+
+
 						<div class="row" style="height:20px"></div>
 						<div class="row">	
-							<div class="col-md-8">
+							<div class="col-md-12">
 								<div class="row"><b><i>Country</i></b></div>
 								<div class="row"><?php echo $_SESSION["country"] ?></div>
 							</div>
-							<div class="col-md-4">
+							<!--<div class="col-md-4">
 								<button type="button" class="btn btn-secondary">Edit</button>
-							</div>
+							</div>-->
 						</div>
 						<div class="row" style="height:20px"></div>
 						<div class="row">	
-							<div class="col-md-8">
+							<div class="col-md-12">
 								<div class="row"><b><i>Industry</i></b></div>
 								<div class="row"><?php echo $_SESSION["industry"] ?></div>
 							</div>
-							<div class="col-md-4">
+							<!--<div class="col-md-4">
 								<button type="button" class="btn btn-secondary">Edit</button>
-							</div>
+							</div>-->
 						</div>
 						<div class="row" style="height:20px"></div>
 						<div class="row">	
-							<div class="col-md-8">
+							<div class="col-md-12">
 								<div class="row"><b><i>Receive Email Alerts?</i></b></div>
 								<div class="row"><?php if($_SESSION["receiveEmails"] == "1"){ echo "Yes";} else { echo "No";} ?></div>
 							</div>
-							<div class="col-md-4">
+							<!--<div class="col-md-4">
 								<button type="button" class="btn btn-secondary">Edit</button>
-							</div>
+							</div>-->
 						</div>
 						<div class="row" style="height:70px"></div>
 						<div class="row">	
 							<div class="col-md-12">
-								<span><button type="button" class="btn btn-secondary">Edit My Exams</button></span>
+								<span><button type="button" class="btn btn-secondary">Edit My Account Settings</button></span>
 							</div>
 						</div>
 						<div class="row" style="height:20px"></div>
@@ -396,7 +384,7 @@ mysqli_close($link);
 			</div>
 		</div>	
 		
-		<script src="modalScript.js"></script>
+		<!--<script src="modalScript.js"></script>-->
 		<script src="navbarScript.js"></script>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -498,6 +486,7 @@ mysqli_close($link);
 	              }
 	            }, 1000);
             }
+
 		</script>
 	
 	</body>
