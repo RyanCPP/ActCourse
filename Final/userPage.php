@@ -157,7 +157,7 @@ mysqli_close($link);
 				  <div class="collapse navbar-collapse" id="navbarText">
 					<ul class="navbar-nav mr-auto">
 					  <li class="nav-item active" style="width: 200px; Text-align: center">
-						<a class="nav-link" href="userExams.html">My Exams<span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="userExams.php">My Exams<span class="sr-only">(current)</span></a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link"  style="width: 200px; Text-align: center" href="userProducts.html">Products</a>

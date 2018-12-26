@@ -1,1 +1,1 @@
-create table coursesPurchased (id int not null primary key, code varchar(5), purchaseDate datetime, expiryDate datetime);
+create table coursesPurchased (id int not null, code varchar(5), purchaseDate datetime, expiryDate datetime, package smallint);

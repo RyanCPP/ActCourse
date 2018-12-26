@@ -20,3 +20,6 @@ To Test:
 MySQL/PHP Code:
     code found @ https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php
     this site has (most useful, simple and effective) code that can be used
+
+View Session Variables on PC:
+    path: /var/lib/php/sessions
