@@ -21,7 +21,7 @@ $sql = "select userExams.code, coursesPurchased.expiryDate, coursesPurchased.pac
 
 if($stmt = mysqli_prepare($link, $sql)){
     // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "s", $param_id);
+    mysqli_stmt_bind_param($stmt, "i", $param_id);
     
     // Set parameters
     $param_id = $_SESSION["id"];
@@ -30,8 +30,6 @@ if($stmt = mysqli_prepare($link, $sql)){
     if(mysqli_stmt_execute($stmt)){
         // Get result
         $result = mysqli_stmt_get_result($stmt);
-
-        $row = mysqli_fetch_array($result, MYSQLI_NUM);
 
         $i = 0;
         while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
@@ -138,7 +136,7 @@ $purchasedPackages = json_encode($packages);
 		</div>
 		
 		<!-- Product Accordion -->
-		<div class="container-fluid" style="background-color: white; height: 600px" id="Settings">
+		<div class="container-fluid" style="background-color: white; height: 800px" id="Settings">
 			<div class="container">
 				<div class="accordion" id="accordionExample">
 				  <!--<div class="card">

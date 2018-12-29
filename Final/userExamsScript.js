@@ -18,13 +18,14 @@ var lastIdUsed;
 //var selectionFromDashNum;
 
 
-	for (i = 0; i < numCourses; i++){
+for (i = 0; i < numCourses; i++){
 		courseText += "<div class=\"row\"><div class=\"col-md-4\"></div><div class=\"col-md-4\"><button type=\"button\" class=\"btn btn-outline-info\" style=\"width: 100%\" id=\"courseButton" + i + "\" onclick=\"populateContent('" + courses[i] + "', 'courseButton" + i + "', " + i + ")\">" + courses[i] + "</button></div><div class=\"col-md-4\"></div></div><div class=\"row\" style=\"height:10px\"></div>";
 	}
 	courseText += "<div class=\"row\" style=\"height: 50px\"></div>";
 	document.getElementById("courseNames").innerHTML = courseText;
 
-populateContent(courses[0],'courseButton0',0);
+//populateContent(courses[0],'courseButton0',0);
+
 
 
     function populateFoundation(courseNumber){
@@ -72,13 +73,13 @@ populateContent(courses[0],'courseButton0',0);
 
 	function populateContent(course, idUsed, courseNumber){
         populateFoundation(courseNumber);
-		if(course == "CM1"){
-			document.getElementById("collapseOne").innerHTML = "<a href=\"CalcIII_Complete.pdf\" target=\"_blank\">CM1 Notes</a>";
+		if(course == "CM2"){
+			document.getElementById("collapseOne").innerHTML = "<embed src=\"CalcIII_Complete.pdf#page=50&toolbar=1&navpanes=1&scrollbar=1\" type=\"application/pdf\" width=\"100%\" height=\"600px\">";//"<a href=\"CalcIII_Complete.pdf\" target=\"_blank\">CM2 Notes</a>";
 		}
 		else {
 			document.getElementById("collapseOne").innerHTML = "this is " + course;
         }
-		document.getElementById("collapseTwo").innerHTML = "this is " + course;
+		document.getElementById("collapseTwo").innerHTML = "<video width=\"100%\" controls><source src=\"test.mp4\"></video>";
 		document.getElementById("collapseThree").innerHTML = "this is " + course;
 		document.getElementById("collapseFour").innerHTML = "this is " + course;
 		document.getElementById("collapseFive").innerHTML = "this is " + course;
@@ -93,6 +94,12 @@ populateContent(courses[0],'courseButton0',0);
             console.log(idUsed);
 		}
 }
+
+
+
+	
+
+
 
 
 

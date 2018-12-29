@@ -13,7 +13,7 @@ require_once "config.php";
  
 // Define variables and initialize with empty values
 $firstName = $lastName = $country = $industry = $receiveEmails = $siteCharacter = $siteName = "";
-$firstName_err = $lastName_err = $country_err = $industry_err = $receiveEmails_err = $siteCharacter_err = $siteName_err = $exams_err = "";
+$firstName_err = $lastName_err = $country_err = $industry_err = $receiveEmails_err = $siteCharacter_err = $siteName_err = $exams_err = $examReg_err = "";
 //$exams needs to be set via an sql query so that if exams are updated this assignment is automatically updated
 $exams = array("CS1","CS2","CM1","CM2","CB1","CB2","CB3","CP1","CP2","CP3","ST0","ST1","ST2","ST4","ST5","ST6","ST7","ST8","ST9","SA0","SA1","SA2","SA3","SA4","SA5","SA6"); 
 $examsLength = count($exams);
@@ -171,6 +171,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group <?php echo (!empty($industry_err)) ? 'has-error' : ''; ?>">
                 <label>What industry are you currently in?</label>
                 <select name="industry" class="form-control">
+                    <option disabled selected value> -- select an option -- </option>
                     <option value="lifeInsurance">Life Insurance</option>
                     <option value="generalInsurance">General Insurance</option>
                     <option value="healthInsurance">Health Insurance</option>
@@ -184,7 +185,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="form-group <?php echo (!empty($country_err)) ? 'has-error' : ''; ?>">
                 <label>What country do you live in?</label>
-                    <select id="country" name="country" class="form-control">
+                <select id="country" name="country" class="form-control">
+                    <option disabled selected value> -- select an option -- </option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Åland Islands">Åland Islands</option>
                     <option value="Albania">Albania</option>
@@ -432,66 +434,79 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </select>
                 <span class="help-block"><?php echo $country_err; ?></span>
             </div>
-            <div class="form-group <?php echo (!empty($exams_err)) ? 'has-error' : ''; ?>">
-                <label>Exams Passed</label><br>
-                <input type="radio" name="CS1"> CS1<br>
-                <input type="radio" name="CS2"> CS2<br>
-                <input type="radio" name="CM1"> CM1<br>
-                <input type="radio" name="CM2"> CM2<br>
-                <input type="radio" name="CB1"> CB1<br>
-                <input type="radio" name="CB2"> CB2<br>
-                <input type="radio" name="CB3"> CB3<br>
-                <input type="radio" name="CP1"> CP1<br>
-                <input type="radio" name="CP2"> CP2<br>
-                <input type="radio" name="CP3"> CP3<br>
-                <input type="radio" name="ST0"> ST0<br>
-                <input type="radio" name="ST1"> ST1<br>
-                <input type="radio" name="ST2"> ST2<br>
-                <input type="radio" name="ST4"> ST4<br>
-                <input type="radio" name="ST5"> ST5<br>
-                <input type="radio" name="ST6"> ST6<br>
-                <input type="radio" name="ST7"> ST7<br>
-                <input type="radio" name="ST8"> ST8<br>
-                <input type="radio" name="ST9"> ST9<br>
-                <input type="radio" name="SA0"> SA0<br>
-                <input type="radio" name="SA1"> SA1<br>
-                <input type="radio" name="SA2"> SA2<br>
-                <input type="radio" name="SA3"> SA3<br>
-                <input type="radio" name="SA4"> SA4<br>
-                <input type="radio" name="SA5"> SA5<br>
-                <input type="radio" name="SA6"> SA6<br>
-                <span class="help-block"><?php echo $exams_err; ?></span>
+
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group <?php echo (!empty($exams_err)) ? 'has-error' : ''; ?>">
+                                <label>Exams Passed</label><br>
+                                <input type="radio" name="CS1"> CS1<br>
+                                <input type="radio" name="CS2"> CS2<br>
+                                <input type="radio" name="CM1"> CM1<br>
+                                <input type="radio" name="CM2"> CM2<br>
+                                <input type="radio" name="CB1"> CB1<br>
+                                <input type="radio" name="CB2"> CB2<br>
+                                <input type="radio" name="CB3"> CB3<br>
+                                <input type="radio" name="CP1"> CP1<br>
+                                <input type="radio" name="CP2"> CP2<br>
+                                <input type="radio" name="CP3"> CP3<br>
+                                <input type="radio" name="ST0"> ST0<br>
+                                <input type="radio" name="ST1"> ST1<br>
+                                <input type="radio" name="ST2"> ST2<br>
+                                <input type="radio" name="ST4"> ST4<br>
+                                <input type="radio" name="ST5"> ST5<br>
+                                <input type="radio" name="ST6"> ST6<br>
+                                <input type="radio" name="ST7"> ST7<br>
+                                <input type="radio" name="ST8"> ST8<br>
+                                <input type="radio" name="ST9"> ST9<br>
+                                <input type="radio" name="SA0"> SA0<br>
+                                <input type="radio" name="SA1"> SA1<br>
+                                <input type="radio" name="SA2"> SA2<br>
+                                <input type="radio" name="SA3"> SA3<br>
+                                <input type="radio" name="SA4"> SA4<br>
+                                <input type="radio" name="SA5"> SA5<br>
+                                <input type="radio" name="SA6"> SA6<br>
+                                <span class="help-block"><?php echo $exams_err; ?></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group <?php echo (!empty($examReg_err)) ? 'has-error' : ''; ?>">
+                                <label>Exams Registered For in the coming Session</label><br>
+                                <input type="radio" name="CS1reg"> CS1<br>
+                                <input type="radio" name="CS2reg"> CS2<br>
+                                <input type="radio" name="CM1reg"> CM1<br>
+                                <input type="radio" name="CM2reg"> CM2<br>
+                                <input type="radio" name="CB1reg"> CB1<br>
+                                <input type="radio" name="CB2reg"> CB2<br>
+                                <input type="radio" name="CB3reg"> CB3<br>
+                                <input type="radio" name="CP1reg"> CP1<br>
+                                <input type="radio" name="CP2reg"> CP2<br>
+                                <input type="radio" name="CP3reg"> CP3<br>
+                                <input type="radio" name="ST0reg"> ST0<br>
+                                <input type="radio" name="ST1reg"> ST1<br>
+                                <input type="radio" name="ST2reg"> ST2<br>
+                                <input type="radio" name="ST4reg"> ST4<br>
+                                <input type="radio" name="ST5reg"> ST5<br>
+                                <input type="radio" name="ST6reg"> ST6<br>
+                                <input type="radio" name="ST7reg"> ST7<br>
+                                <input type="radio" name="ST8reg"> ST8<br>
+                                <input type="radio" name="ST9reg"> ST9<br>
+                                <input type="radio" name="SA0reg"> SA0<br>
+                                <input type="radio" name="SA1reg"> SA1<br>
+                                <input type="radio" name="SA2reg"> SA2<br>
+                                <input type="radio" name="SA3reg"> SA3<br>
+                                <input type="radio" name="SA4reg"> SA4<br>
+                                <input type="radio" name="SA5reg"> SA5<br>
+                                <input type="radio" name="SA6reg"> SA6<br>
+                                <span class="help-block"><?php echo $examReg_err; ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group <?php echo (!empty($examReg_err)) ? 'has-error' : ''; ?>">
-                <label>Exams Registered For in the coming Session</label><br>
-                <input type="radio" name="CS1reg"> CS1<br>
-                <input type="radio" name="CS2reg"> CS2<br>
-                <input type="radio" name="CM1reg"> CM1<br>
-                <input type="radio" name="CM2reg"> CM2<br>
-                <input type="radio" name="CB1reg"> CB1<br>
-                <input type="radio" name="CB2reg"> CB2<br>
-                <input type="radio" name="CB3reg"> CB3<br>
-                <input type="radio" name="CP1reg"> CP1<br>
-                <input type="radio" name="CP2reg"> CP2<br>
-                <input type="radio" name="CP3reg"> CP3<br>
-                <input type="radio" name="ST0reg"> ST0<br>
-                <input type="radio" name="ST1reg"> ST1<br>
-                <input type="radio" name="ST2reg"> ST2<br>
-                <input type="radio" name="ST4reg"> ST4<br>
-                <input type="radio" name="ST5reg"> ST5<br>
-                <input type="radio" name="ST6reg"> ST6<br>
-                <input type="radio" name="ST7reg"> ST7<br>
-                <input type="radio" name="ST8reg"> ST8<br>
-                <input type="radio" name="ST9reg"> ST9<br>
-                <input type="radio" name="SA0reg"> SA0<br>
-                <input type="radio" name="SA1reg"> SA1<br>
-                <input type="radio" name="SA2reg"> SA2<br>
-                <input type="radio" name="SA3reg"> SA3<br>
-                <input type="radio" name="SA4reg"> SA4<br>
-                <input type="radio" name="SA5reg"> SA5<br>
-                <input type="radio" name="SA6reg"> SA6<br>
-                <span class="help-block"><?php echo $examReg_err; ?></span>
-            </div>
+            
+            
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
             </div>

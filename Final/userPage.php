@@ -235,26 +235,6 @@ mysqli_close($link);
 		
 		<!-- Account Settings -->
 		<div class="container-fluid" style="background-color: white; height: 600px;" id="Settings">
-			
-			<!-- Modal -->
-			<div id="myModal" class="modal">
-			  <div class="modal-content">
-				<div class="modal-header">
-				  <span class="close">&times;</span>
-				  <h2>Modal Header</h2>
-				</div>
-				<div class="modal-body">
-				  <p>Some text in the Modal Body</p>
-				  <p>Some other text...</p>
-				  <button>click me</button>
-				</div>
-				<!--<div class="modal-footer">
-				  <h3>Modal Footer</h3>
-				</div>-->
-			  </div>
-
-			</div>
-			
 			<div class="container">
 				<div class="row" style="height: 100px;">
 					<div class="col-md-4"></div>
@@ -320,7 +300,7 @@ mysqli_close($link);
 						<div class="row" style="height:70px"></div>
 						<div class="row">	
 							<div class="col-md-12">
-								<span><button type="button" class="btn btn-secondary">Edit My Account Settings</button></span>
+								<a href="updateUserDetails.php"><span><button type="button" class="btn btn-secondary">Edit My Account Settings</button></span></a>
 							</div>
 						</div>
 						<div class="row" style="height:20px"></div>
