@@ -1,3 +1,95 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+
+$coursesPurchased = array();
+$packages = array();
+$allCourses = array("CS1","CS2","CM1","CM2","CB1","CB2","CB3","CP1","CP2","CP3","Excel","SQL");
+$allCoursesLength = sizeof($allCourses);
+$courseDescriptions = array();
+
+// Include config file
+require_once "config.php";
+
+$sql = "select code, package from coursesPurchased where id = ?";
+
+if($stmt = mysqli_prepare($link, $sql)){
+    // Bind variables to the prepared statement as parameters
+    mysqli_stmt_bind_param($stmt, "i", $param_id);
+    
+    // Set parameters
+    $param_id = $_SESSION["id"];
+    
+    // Attempt to execute the prepared statement
+    if(mysqli_stmt_execute($stmt)){
+        // Get result
+        $result = mysqli_stmt_get_result($stmt);
+
+        $i = 0;
+        while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+            array_push($coursesPurchased,$row[0]);
+            array_push($packages,$row[1]);
+            $i = $i + 1;
+        }
+
+    }
+    else{
+            // Display an error message if email doesn't exist
+            //$email_err = "No account found with that email.";
+    }
+}
+else{
+        echo "Oops! Something went wrong. Please try again later.";
+}
+
+
+$userCourses = json_encode($coursesPurchased);
+$purchasedPackages = json_encode($packages);
+//$allCourses1 = json_encode($allCourses);
+
+
+
+$sql = "select description from exams where product = ?";
+
+if($stmt = mysqli_prepare($link, $sql)){
+    // Bind variables to the prepared statement as parameters
+    mysqli_stmt_bind_param($stmt, "i", $param_prod);
+    
+    // Set parameters
+    $param_prod = 1;
+    
+    // Attempt to execute the prepared statement
+    if(mysqli_stmt_execute($stmt)){
+        // Get result
+        $result = mysqli_stmt_get_result($stmt);
+
+        $i = 0;
+        while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+            array_push($courseDescriptions,$row[0]);
+            $i = $i + 1;
+        }
+
+    }
+    else{
+            // Display an error message if email doesn't exist
+            //$email_err = "No account found with that email.";
+    }
+}
+else{
+        echo "Oops! Something went wrong. Please try again later.";
+}
+
+
+$descriptions = json_encode($courseDescriptions);
+
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -285,10 +377,14 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		<script>
 			var allCourses = ["CS1","CS2","CM1","CM2","CB1","CB2","CB3","CP1","CP2","CP3","Excel","SQL"];
+            var courseDescriptions = <?php echo $descriptions; ?>;
 			//var coursePrices = [100,110,120,130,140,150,160,170,180,190,200,210];		//add multidimensional arrary (one dimension for each product, basic, pro etc)
             var coursePrices = [100,110,120,130,140,150,160,170,180,190,200,210];
 			var numAllCourses = allCourses.length;
-			var userExams = ["CM2","CB2","CP2","CS1"];
+			//var userExams = ["CM2","CB2","CP2","CS1"];
+            var userExams = <?php echo $userCourses; ?>;
+            var userPackages = <?php echo $purchasedPackages; ?>;
+            //var allCourses = <?php echo $allCourses1; ?>;
 			var numUserExams = userExams.length;
 			var text = "";
 			var textNotRegis = "Purchase";
@@ -307,22 +403,32 @@
 				var text2;
 				
 				for (j = 0; j < numUserExams; j++){
-					if(allCourses[i] == userExams[j]){
+					if(allCourses[i] == userExams[j] && userPackages[j] < 3){
 						text2 = textRegis;
 						break;
 					}
+                    else if(allCourses[i] == userExams[j] && userPackages[j] == 3){
+                        text2 = "Unavailable";
+                        break;
+                    }
 					else
 						text2 = textNotRegis;
 				}
 				
-				text += "<tr id=\"course" + i + "\" onclick=\"showCost('" + allCourses[i] + "', coursePrices, allCourses, " + i + ")\"><td>" + allCourses[i] + "</td><td>description variable passed from php</td><td>" + text2 + "</td></tr>";
+				text += "<tr id=\"course" + i + "\" onclick=\"showCost('" + allCourses[i] + "', coursePrices, allCourses, " + i + ",'" + text2 + "')\"><td>" + allCourses[i] + "</td><td>" + courseDescriptions[i] + "</td><td>" + text2 + "</td></tr>";
 			}
 			
 			document.getElementById("tableBody").innerHTML = text;
 			
-			
-			function showCost(course, prices, courses, rowNumber){
-				document.getElementById("basicTotal").innerHTML = "<em>$" + prices[courses.indexOf(course)] + "</em>";
+            			
+            function checkOption(check){
+                if(check == "Unavailable")
+                    alert("You have already purchased this product with the best package.\nPlease select a different product.");
+            }
+
+			function showCost(course, prices, courses, rowNumber, textCheck){
+                checkOption(textCheck);				
+                document.getElementById("basicTotal").innerHTML = "<em>$" + prices[courses.indexOf(course)] + "</em>";
 				document.getElementById("intermediateTotal").innerHTML = "<em>$" + prices[courses.indexOf(course)]*1.25 + "</em>";
 				document.getElementById("proTotal").innerHTML = "<em>$" + prices[courses.indexOf(course)]*1.5 + "</em>";
 				selectedExam = course;
@@ -337,7 +443,9 @@
 					previousRow = rowNumber;
 					}
 			}
-						
+			
+            
+			
 			function addToCart(packageChosen){
 				if(selectedExam == null){
 					alert("Please select an exam.");

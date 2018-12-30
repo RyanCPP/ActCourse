@@ -160,7 +160,7 @@ mysqli_close($link);
 						<a class="nav-link" href="userExams.php">My Exams<span class="sr-only">(current)</span></a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link"  style="width: 200px; Text-align: center" href="userProducts.html">Products</a>
+						<a class="nav-link"  style="width: 200px; Text-align: center" href="userProducts.php">Products</a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link"  style="width: 200px; Text-align: center" href="logout.php">Logout</a>
@@ -327,7 +327,6 @@ mysqli_close($link);
 				<footer class="pt-4 my-md-5 pt-md-5 border-top">
 					<div class="row">
 					  <div class="col-12 col-md">
-						<img class="mb-2" src="../../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
 						<small class="d-block mb-3 text-muted">© 2017-2018</small>
 					  </div>
 					  <div class="col-6 col-md">
@@ -381,7 +380,7 @@ mysqli_close($link);
             //var selectionFromDashNum;
 
             for (i = 0; i < userCourses.length; i++){
-	            text += "<tr style=\"text-align:center\"><td><a href=\"userExams.html\" onclick=\"setFirstSelection('" + userCourses[i] + "', 'courseButton" + i + "')\">" + userCourses[i] + "</a></td><td>" + courseProgress[i] + "%</td><td id=\"demo" + (i + 1) + "\"></td></tr>";
+	            text += "<tr style=\"text-align:center\"><td><a href=\"userExams.php\" onclick=\"setFirstSelection('" + userCourses[i] + "', 'courseButton" + i + "')\">" + userCourses[i] + "</a></td><td>" + courseProgress[i] + "%</td><td id=\"demo" + (i + 1) + "\"></td></tr>";
                 setCountdown("demo" + (i + 1), examDates[i]);
             }
 

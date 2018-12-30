@@ -90,7 +90,7 @@ $purchasedPackages = json_encode($packages);
 						<a class="nav-link" href="#top">My Exams<span class="sr-only">(current)</span></a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link"  style="width: 200px; Text-align: center" href="userProducts.html">Products</a>
+						<a class="nav-link"  style="width: 200px; Text-align: center" href="userProducts.php">Products</a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link"  style="width: 200px; Text-align: center" href="logout.php">Logout</a>
@@ -136,7 +136,7 @@ $purchasedPackages = json_encode($packages);
 		</div>
 		
 		<!-- Product Accordion -->
-		<div class="container-fluid" style="background-color: white; height: 800px" id="Settings">
+		<div class="container-fluid" style="background-color: white; height: 400px" id="Settings">
 			<div class="container">
 				<div class="accordion" id="accordionExample">
 				  <!--<div class="card">
@@ -225,13 +225,12 @@ $purchasedPackages = json_encode($packages);
 		</div>
 		
 		<!-- Footer -->
-		<div class="container-fluid" style="background-color: powderblue; height: 500px">
+		<div class="container-fluid" style="background-color: powderblue; height: 300px">
 			
 			<div class="container" style="background-color: powderblue" id="footer">
 				<footer class="pt-4 my-md-5 pt-md-5 border-top">
 					<div class="row">
 					  <div class="col-12 col-md">
-						<img class="mb-2" src="../../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
 						<small class="d-block mb-3 text-muted">© 2017-2018</small>
 					  </div>
 					  <div class="col-6 col-md">
