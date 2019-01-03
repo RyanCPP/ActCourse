@@ -2,6 +2,7 @@
 ---------------UserExams Script--------------------*/
 
 //var courses = ["CM1","CM2","SQL"];//,"CT5","CA1"];
+
 var allProducts = ["Course Notes","Course Videos","Past Exam Review","Study Planner","Chat Forum"];
 var numCourses = courses.length;
 var productStyle = ["One","Two","Three","Four","Five"];
@@ -11,9 +12,58 @@ var lastIdUsed;
 var accordionOpenCount = 0;
 
 /*---------------------------------------------------------------------------------------------------------------*/
-var subAccordionText = "<div class=\"container\" style=\"padding: 10px\"><div class=\"accordion-inner\" id=\"accordionExample2\"><div class=\"card\"><div class=\"card-header\" id=\"headingSix\"><h5 class=\"mb-0\"><button class=\"btn btn-link\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseSix\" aria-expanded=\"false\" aria-controls=\"collapseSix\">Course Notes</button></h5></div><div id=\"collapseSix\" class=\"collapse\" aria-labelledby=\"headingSix\" data-parent=\"#accordionExample2\"><div class=\"card-body\">first group</div></div></div><div class=\"card\"><div class=\"card-header\" id=\"headingSeven\"><h5 class=\"mb-0\"><button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseSeven\" aria-expanded=\"false\" aria-controls=\"collapseSeven\">Course Videos</button></h5></div><div id=\"collapseSeven\" class=\"collapse\" aria-labelledby=\"headingSeven\" data-parent=\"#accordionExample2\"><div class=\"card-body\">second group</div></div></div><div class=\"card\"><div class=\"card-header\" id=\"headingEight\"><h5 class=\"mb-0\"><button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseEight\" aria-expanded=\"false\" aria-controls=\"collapseEight\">Past Exam Review</button></h5></div><div id=\"collapseEight\" class=\"collapse\" aria-labelledby=\"headingEight\" data-parent=\"#accordionExample2\"><div class=\"card-body\">third group</div></div></div></div>";
+var courseVideosText = "<div class=\"container\" style=\"padding: 10px\"><div class=\"accordion-inner\" id=\"accordionExample2\"><div class=\"card\"><div class=\"card-header\" id=\"headingSix\"><h5 class=\"mb-0\"><button class=\"btn btn-link\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseSix\" aria-expanded=\"false\" aria-controls=\"collapseSix\">Course Notes</button></h5></div><div id=\"collapseSix\" class=\"collapse\" aria-labelledby=\"headingSix\" data-parent=\"#accordionExample2\"><div class=\"card-body\">first group</div></div></div><div class=\"card\"><div class=\"card-header\" id=\"headingSeven\"><h5 class=\"mb-0\"><button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseSeven\" aria-expanded=\"false\" aria-controls=\"collapseSeven\">Course Videos</button></h5></div><div id=\"collapseSeven\" class=\"collapse\" aria-labelledby=\"headingSeven\" data-parent=\"#accordionExample2\"><div class=\"card-body\">second group</div></div></div><div class=\"card\"><div class=\"card-header\" id=\"headingEight\"><h5 class=\"mb-0\"><button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseEight\" aria-expanded=\"false\" aria-controls=\"collapseEight\">Past Exam Review</button></h5></div><div id=\"collapseEight\" class=\"collapse\" aria-labelledby=\"headingEight\" data-parent=\"#accordionExample2\"><div class=\"card-body\">third group</div></div></div></div>";
+
+
+
 
 /*---------------------------------------------------------------------------------------------------------------*/
+
+
+var chapters = ["Chapter 1.1","Chapter 1.2","Chapter 1.3","Chapter 1.4","Chapter 1.5","Chapter 2.1","Chapter 2.2","Chapter 2.3"];
+var chaptersVid = ["Chapter 1.1 Video","Chapter 1.2 Video","Chapter 1.3 Video","Chapter 2.1 Video","Chapter 2.2 Video"];
+var chapterLengths = [5,3];
+var chapterVidLengths = [3,2];
+var preNotesText = "<div class=\"container\" style=\"padding: 10px\"><div class=\"accordion-inner\" id=\"notesAccordion\">";
+var preVideosText = "<div class=\"container\" style=\"padding: 10px\"><div class=\"accordion-inner\" id=\"videosAccordion\">";
+var postNotesText = "</div></div>";
+var postVideosText = "</div></div>";
+    
+var courseNotesTextArray = [];
+var courseVideosTextArray = [];
+
+var cumulative = 0;
+for (i = 0; i < numCourses; i++){
+    courseNotesTextArray[i] = preNotesText;
+    for (j = 0; j < chapterLengths[i]; j++) {
+        var number = j;
+        var heading = chapters[cumulative + j];
+        var content = " this is content " + cumulative + j;
+        courseNotesTextArray[i] += "<div class=\"card\"><div class=\"card-header\" id=\"heading" + number + "\"><h5 class=\"mb-0\"><button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapse" + number + "\" aria-expanded=\"false\" aria-controls=\"collapse" + number + "\">" + heading + "</button></h5></div><div id=\"collapse" + number + "\" class=\"collapse\" aria-labelledby=\"heading" + number + "\" data-parent=\"#notesAccordion\"><div class=\"card-body\">" + content + "</div></div></div>";
+    }
+    cumulative += chapterLengths[i];
+    courseNotesTextArray[i] += postNotesText;
+}
+
+
+var cumulative = 0;
+for (i = 0; i < numCourses; i++){
+    courseVideosTextArray[i] = preVideosText;
+    for (j = 0; j < chapterVidLengths[i]; j++) {
+        var number = j;
+        var heading = chaptersVid[cumulative + j];
+        var content = " this is content " + cumulative + j;
+        courseVideosTextArray[i] += "<div class=\"card\"><div class=\"card-header\" id=\"headingVid" + number + "\"><h5 class=\"mb-0\"><button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseVid" + number + "\" aria-expanded=\"false\" aria-controls=\"collapseVid" + number + "\">" + heading + "</button></h5></div><div id=\"collapseVid" + number + "\" class=\"collapse\" aria-labelledby=\"headingVid" + number + "\" data-parent=\"#videosAccordion\"><div class=\"card-body\">" + content + "</div></div></div>";
+    }
+    cumulative += chapterVidLengths[i];
+    courseVideosTextArray[i] += postVideosText;
+}
+
+  
+
+/*---------------------------------------------------------------------------------------------------------------*/
+
+
 
 //var products = ["Course Notes","Course Videos"];//,"Past Exam Review","Study Planner","Chat Forum"];
 //var productsNotTaken = ["Past Exam Review","Study Planner","Chat Forum"];
@@ -29,7 +79,7 @@ for (i = 0; i < numCourses; i++){
 	courseText += "<div class=\"row\" style=\"height: 50px\"></div>";
 	document.getElementById("courseNames").innerHTML = courseText;
 
-//populateContent(courses[0],'courseButton0',0);
+populateContent(courses[0],'courseButton0',0);
 
 
 
@@ -43,7 +93,9 @@ for (i = 0; i < numCourses; i++){
         }
         else if(purchasedPackages[courseNumber] == 2){
             var products = ["Course Notes","Course Videos","Past Exam Review"]//,"Study Planner","Chat Forum"];
-            var productsNotTaken = ["Study Planner","Chat Forum"];    
+            //var products = ["Course Notes","Study Planner","Past Exam Review"]//,"Study Planner","Chat Forum"];
+            //var productsNotTaken = ["Course Videos","Chat Forum"];
+            var productsNotTaken = ["Study Planner","Chat Forum"];
         }
         else if(purchasedPackages[courseNumber] == 3){
             var products = ["Course Notes","Course Videos","Past Exam Review","Study Planner","Chat Forum"];
@@ -59,7 +111,7 @@ for (i = 0; i < numCourses; i++){
 	        }
 
 	        for (i = 0; i < numproductsNotTaken; i++){
-		        productText += "<div class=\"row\" style=\"height:50px;padding-left:15px; padding-right:15px;\"><div class=\"col-md-12\" style=\"background-color: #F3F2F2; text-align: center; padding-top:10px; border-style: solid; border-width: thin; border-color: #D8D7D7\"><a href=\"userProducts.html\">Purchase " + productsNotTaken[i] + "</a></div></div>";
+		        productText += "<div class=\"row\" style=\"height:50px;padding-left:15px; padding-right:15px;\"><div class=\"col-md-12\" style=\"background-color: #F3F2F2; text-align: center; padding-top:10px; border-style: solid; border-width: thin; border-color: #D8D7D7\"><a href=\"userProducts.php\">Purchase " + productsNotTaken[i] + "</a></div></div>";
 	        }
 
 
@@ -78,8 +130,8 @@ for (i = 0; i < numCourses; i++){
 
 	function populateContent(course, idUsed, courseNumber){
         populateFoundation(courseNumber);
-		document.getElementById("collapseOne").innerHTML = subAccordionText;
-		document.getElementById("collapseTwo").innerHTML = subAccordionText;
+		document.getElementById("collapseOne").innerHTML = courseNotesTextArray[courseNumber];
+		document.getElementById("collapseTwo").innerHTML = courseVideosTextArray[courseNumber];
 		if(course == "CM2" || course == "CM1"){
 			document.getElementById("collapseSix").innerHTML = "<embed src=\"CalcIII_Complete.pdf#page=50&toolbar=1&navpanes=1&scrollbar=1\" type=\"application/pdf\" width=\"100%\" height=\"600px\">";//"<a href=\"CalcIII_Complete.pdf\" target=\"_blank\">CM2 Notes</a>";
 		}
@@ -100,7 +152,7 @@ for (i = 0; i < numCourses; i++){
 			lastIdUsed = idUsed;
             console.log(idUsed);
 		}
-}
+    }
 
     function extendDiv(idee){
         if(accordionOpenCount % 2 == 0){        
