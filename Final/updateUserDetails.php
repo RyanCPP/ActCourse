@@ -527,6 +527,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <!--<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>-->
         </form>
+        <div class="container">
+            <div class="row">
+                <a href="userPage.php"><button type="button" class="btn btn-secondary">Cancel</button></a>
+            </div>
+        </div>
     </div>
     
 </body>

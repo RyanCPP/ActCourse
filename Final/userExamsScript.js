@@ -11,9 +11,6 @@ var productText = "";
 var lastIdUsed;
 var accordionOpenCount = 0;
 
-/*---------------------------------------------------------------------------------------------------------------*/
-var courseVideosText = "<div class=\"container\" style=\"padding: 10px\"><div class=\"accordion-inner\" id=\"accordionExample2\"><div class=\"card\"><div class=\"card-header\" id=\"headingSix\"><h5 class=\"mb-0\"><button class=\"btn btn-link\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseSix\" aria-expanded=\"false\" aria-controls=\"collapseSix\">Course Notes</button></h5></div><div id=\"collapseSix\" class=\"collapse\" aria-labelledby=\"headingSix\" data-parent=\"#accordionExample2\"><div class=\"card-body\">first group</div></div></div><div class=\"card\"><div class=\"card-header\" id=\"headingSeven\"><h5 class=\"mb-0\"><button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseSeven\" aria-expanded=\"false\" aria-controls=\"collapseSeven\">Course Videos</button></h5></div><div id=\"collapseSeven\" class=\"collapse\" aria-labelledby=\"headingSeven\" data-parent=\"#accordionExample2\"><div class=\"card-body\">second group</div></div></div><div class=\"card\"><div class=\"card-header\" id=\"headingEight\"><h5 class=\"mb-0\"><button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseEight\" aria-expanded=\"false\" aria-controls=\"collapseEight\">Past Exam Review</button></h5></div><div id=\"collapseEight\" class=\"collapse\" aria-labelledby=\"headingEight\" data-parent=\"#accordionExample2\"><div class=\"card-body\">third group</div></div></div></div>";
-
 
 
 
@@ -22,15 +19,20 @@ var courseVideosText = "<div class=\"container\" style=\"padding: 10px\"><div cl
 
 var chapters = ["Chapter 1.1","Chapter 1.2","Chapter 1.3","Chapter 1.4","Chapter 1.5","Chapter 2.1","Chapter 2.2","Chapter 2.3"];
 var chaptersVid = ["Chapter 1.1 Video","Chapter 1.2 Video","Chapter 1.3 Video","Chapter 2.1 Video","Chapter 2.2 Video"];
+var chaptersChatForum = ["Chapter 1.1","Chapter 1.2","Chapter 1.3","Chapter 1.4","Chapter 1.5","Chapter 2.1","Chapter 2.2","Chapter 2.3"];
 var chapterLengths = [5,3];
 var chapterVidLengths = [3,2];
-var preNotesText = "<div class=\"container\" style=\"padding: 10px\"><div class=\"accordion-inner\" id=\"notesAccordion\">";
-var preVideosText = "<div class=\"container\" style=\"padding: 10px\"><div class=\"accordion-inner\" id=\"videosAccordion\">";
+var chapterChatForumLengths = [5,3];
+var preNotesText = "<div class=\"container\" style=\"padding: 15px\"><div class=\"accordion-inner\" id=\"notesAccordion\">";
+var preVideosText = "<div class=\"container\" style=\"padding: 15px\"><div class=\"accordion-inner\" id=\"videosAccordion\">";
+var preChatForumText = "<div class=\"container\" style=\"padding: 15px\"><div class=\"accordion-inner\" id=\"chatForumAccordion\">";
 var postNotesText = "</div></div>";
 var postVideosText = "</div></div>";
+var postChatForumText = "</div></div>";
     
 var courseNotesTextArray = [];
 var courseVideosTextArray = [];
+var chatForumTextArray = [];
 
 var cumulative = 0;
 for (i = 0; i < numCourses; i++){
@@ -46,7 +48,7 @@ for (i = 0; i < numCourses; i++){
 }
 
 
-var cumulative = 0;
+cumulative = 0;
 for (i = 0; i < numCourses; i++){
     courseVideosTextArray[i] = preVideosText;
     for (j = 0; j < chapterVidLengths[i]; j++) {
@@ -59,6 +61,19 @@ for (i = 0; i < numCourses; i++){
     courseVideosTextArray[i] += postVideosText;
 }
 
+
+cumulative = 0;
+for (i = 0; i < numCourses; i++){
+    chatForumTextArray[i] = preChatForumText;
+    for (j = 0; j < chapterChatForumLengths[i]; j++) {
+        var number = j;
+        var heading = chaptersChatForum[cumulative + j];
+        var content = " this is content " + cumulative + j;
+        chatForumTextArray[i] += "<div class=\"card\"><div class=\"card-header\" id=\"headingChatForum" + number + "\"><h5 class=\"mb-0\"><button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseChatForum" + number + "\" aria-expanded=\"false\" aria-controls=\"collapseChatForum" + number + "\">" + heading + "</button></h5></div><div id=\"collapseChatForum" + number + "\" class=\"collapse\" aria-labelledby=\"headingChatForum" + number + "\" data-parent=\"#chatForumAccordion\"><div class=\"card-body\">" + content + "</div></div></div>";
+    }
+    cumulative += chapterChatForumLengths[i];
+    chatForumTextArray[i] += postChatForumText;
+}
   
 
 /*---------------------------------------------------------------------------------------------------------------*/
@@ -119,29 +134,23 @@ populateContent(courses[0],'courseButton0',0);
 
     }
 
-	/*
-	if(selectionFromDash != null){
-		alert('Here i am');
-		populateContent(selectionFromDash, selectionFromDashNum);
-		selectionFromDash = null;
-		selectionFromDashNum = null;
-	}
-	*/
+	
 
 	function populateContent(course, idUsed, courseNumber){
         populateFoundation(courseNumber);
 		document.getElementById("collapseOne").innerHTML = courseNotesTextArray[courseNumber];
 		document.getElementById("collapseTwo").innerHTML = courseVideosTextArray[courseNumber];
-		if(course == "CM2" || course == "CM1"){
+        document.getElementById("collapseFive").innerHTML = chatForumTextArray[courseNumber];
+		/*if(course == "CM2" || course == "CM1"){
 			document.getElementById("collapseSix").innerHTML = "<embed src=\"CalcIII_Complete.pdf#page=50&toolbar=1&navpanes=1&scrollbar=1\" type=\"application/pdf\" width=\"100%\" height=\"600px\">";//"<a href=\"CalcIII_Complete.pdf\" target=\"_blank\">CM2 Notes</a>";
 		}
 		else {
 			document.getElementById("collapseSix").innerHTML = "this is " + course;
         }
-		document.getElementById("collapseSeven").innerHTML = "<video width=\"100%\" controls><source src=\"test.mp4\"></video>";
+		document.getElementById("collapseSeven").innerHTML = "<video width=\"100%\" controls><source src=\"test.mp4\"></video>";*/
 		document.getElementById("collapseThree").innerHTML = "this is " + course;
 		document.getElementById("collapseFour").innerHTML = "this is " + course;
-		document.getElementById("collapseFive").innerHTML = "this is " + course;
+		
 		document.getElementById(idUsed).className = "btn btn-info";
 		if (lastIdUsed == null){
 			lastIdUsed = idUsed;
